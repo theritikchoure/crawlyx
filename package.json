@@ -1,8 +1,11 @@
 {
-  "name": "webcrawler",
+  "name": "crawlyx",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "bin": {
+    "crawlyx": "./bin/bash"
+  },
   "scripts": {
     "start": "node main.js",
     "test": "jest"

@@ -1,6 +1,8 @@
 const { crawlPage } = require('./crawl');
 const { generateReport } = require('./report/report');
 
+exports.mainFunction = main;
+
 async function main() {
     if(process.argv.length < 3) {
         console.log('no website provided');
@@ -20,4 +22,4 @@ async function main() {
     generateReport(pages);
 }
 
-main();
+// main();
