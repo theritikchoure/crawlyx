@@ -9,7 +9,7 @@ function reportContent(pages) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Crawlyx - Report</title>
 
     <style>
         table {
@@ -36,7 +36,7 @@ function reportContent(pages) {
 </head>
 
 <body>
-    <h2 class="text-center">Awesome Report</h2>
+    <h2 class="text-center">Crawlyx - Report</h2>
     <p class="text-center">Report generated: ${(new Date).toLocaleString()}</h2>
 
     <table>
