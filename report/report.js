@@ -7,8 +7,8 @@ function generateReport(pages) {
 
     const htmlContent = reportContent(sortedPages);
 
-    fs.mkdirSync(`${process.cwd()}/awesome-report`, { recursive: true },);
-    let reportFilePath = `${process.cwd()}/awesome-report/report.html`;
+    fs.mkdirSync(`${__dirname}/awesome-report`, { recursive: true },);
+    let reportFilePath = `${__dirname}/awesome-report/report.html`;
     fs.writeFileSync(reportFilePath, htmlContent);
 
 
@@ -23,9 +23,6 @@ function sortPages(pages) {
     const pagesArr = Object.entries(pages);
 
     pagesArr.sort((a, b) => {
-        let aHits = a[1];
-        let bHits = b[1];
-
         return b[1] - a[1];
     })
 
