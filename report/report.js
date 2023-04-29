@@ -1,19 +1,21 @@
-function printReport(pages) {
-    console.log("=======================");
-    console.log("=========REPORT========");
-    console.log("=======================");
+const fs = require('fs');
+const { exec } = require("child_process");
+const { reportContent } = require("../utils/reportContent");
 
+function generateReport(pages) {
     const sortedPages = sortPages(pages);
 
-    for (const sortedPage of sortedPages) {
-        const url = sortedPage.url;
-        const occurrence = sortedPage.occurrence;
-        console.log(`Found ${occurrence} links to page ${url}`);
-    }
+    const htmlContent = reportContent(sortedPages);
 
-    console.log("=======================");
-    console.log("==========End==========");
-    console.log("=======================");
+    fs.mkdirSync(`${process.cwd()}/awesome-report`, { recursive: true },);
+    let reportFilePath = `${process.cwd()}/awesome-report/report.html`;
+    fs.writeFileSync(reportFilePath, htmlContent);
+
+
+    console.log("=========================================================");
+    console.log(`\x1b[22;92mReport generated successfully \x1b[0m`);
+    console.log(reportFilePath);
+    exec(`start ${reportFilePath}`);
 }
 
 
@@ -39,4 +41,4 @@ function sortPages(pages) {
     return res;
 }
 
-module.exports = { sortPages, printReport };
+module.exports = { sortPages, generateReport };
