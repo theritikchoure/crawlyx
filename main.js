@@ -28,4 +28,4 @@ async function main() {
     generateReport(baseUrl, pages);
 }
 
-// main();
+main();

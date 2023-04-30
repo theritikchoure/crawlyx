@@ -1,6 +1,8 @@
 function reportContent(baseUrl, pages) {
     const tableBodyContent = generateTableContent(pages);
 
+    const imageContent = generateImageAnalysisContent(pages);
+
     const htmlContent = `
 <!DOCTYPE html>
 <html lang="en">
@@ -10,6 +12,8 @@ function reportContent(baseUrl, pages) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crawlyx - Report</title>
+    <!-- favicon -->
+    <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/theritikchoure/theritikchoure/main/media/crawlyx-logo-rounded.png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -134,6 +138,45 @@ function reportContent(baseUrl, pages) {
             position: fixed;
             display: none;
         }
+
+        .accordion {
+            color: #444;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+            transition: 0.4s;
+            border-bottom: 1px solid #e2e2e2;
+        }
+
+        .active,
+        .accordion:hover {
+            background-color: #ccc;
+        }
+
+        .accordion:after {
+            content: '\u002B';
+            color: #777;
+            font-weight: bold;
+            float: right;
+            margin-left: 5px;
+        }
+
+        .accordion.active:after {
+            content: "\u2212";
+        }
+
+
+        .panel {
+            padding: 0 18px;
+            background-color: white;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+        }
     </style>
 </head>
 
@@ -142,7 +185,7 @@ function reportContent(baseUrl, pages) {
     <div class="sidebar">
         <a class="active" href="#home" onclick="changeMenu(event)"> <i class="fa fa-fw fa-home"></i>Home</a>
         <a href="#links" onclick="changeMenu(event)"><i class="fa fa-fw fa-link"></i>Links</a>
-        <a href="#keywords" onclick="changeMenu(event)"><i class="fa fa-fw fa-cloud"></i>Keywords</a>
+        <a href="#image-analytics" onclick="changeMenu(event)"><i class="fa fa-fw fa-image"></i>Image analytics</a>
         <a href="javascript:void(0)" onclick="printDiv('home')"><i class="fa fa-fw fa-print"></i>Print report</a>
         <a href="#help" onclick="changeMenu(event)"><i class="fa fa-fw fa-question"></i>Help</a>
     </div>
@@ -207,6 +250,14 @@ function reportContent(baseUrl, pages) {
                 ${tableBodyContent}
             </table>
         </div>
+
+        
+        <div class="links mb-8 bg-white p-6 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]"
+            id="image-analytics">
+            <h3 class="text-center text-2xl font-semibold text-black mb-8">Image Analysis</h3>
+
+            ${imageContent}
+        </div>
     </div>
     <footer class="bg-neutral-100 text-center lg:text-left">
         <div class="p-4 text-center">
@@ -266,6 +317,25 @@ function reportContent(baseUrl, pages) {
             e.target.className = "active";
         }
     </script>
+
+    <script>
+        // add event listeners to the image analysis elements
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                }
+            });
+        }
+    </script>
+
 </body>
 
 </html>
@@ -287,12 +357,124 @@ function generateTableContent(pages) {
             <td>${page.statusCode}</td>
         </tr>
         `;
-        
+
         tableContent = tableContent + tr;
         serialNumber++;
     }
 
     return tableContent;
+}
+
+function generateImageAnalysisContent(pages) {
+    let templateContent = '';
+    for (const page of pages) {
+        let panelContent = '';
+        if (page.images) {
+            let tableForImageWithAltText = '';
+            let tableForImageWithoutAltText = '';
+
+            // Images with alt text
+            if (page.images?.withAltText.length > 0) {
+                let iwalt = '';
+                let serialNumber = 1;
+                for (const imageWithAlt of page.images?.withAltText) {
+                    let a = `
+                    <tr>
+                        <td>${serialNumber}</td>
+                        <td>${imageWithAlt.imageSrc}</td>
+                        <td>${imageWithAlt.altText}</td>
+                        <td><a href=${imageWithAlt.imageSrc} target="_blank">
+                            <i class="fa fa-fw fa-eye"></i>
+                        </a></td>
+                    </tr>
+                    `;
+
+                    iwalt = iwalt + a;
+                    serialNumber++;
+                }
+
+                tableForImageWithAltText = `
+                <h4 class="text-center text-lg my-4">Image with alt text</h4>
+                <table class="mb-4">
+                    <tr>
+                        <th>#</th>
+                        <th>Image src</th>
+                        <th>Alt text</th>
+                        <th>View image</th>
+                    </tr>
+
+                    ${iwalt}
+                </table>
+                `;
+
+            } else {
+                tableForImageWithAltText = `
+                <h4 class="text-center text-lg my-4">Image with alt text</h4>
+                <p class="text-center my-4">No images found with alt text </td>
+                `;
+            }
+
+            // Images without alt text
+            if (page.images?.withoutAltText.length > 0) {
+                let iwoalt = '';
+                let serialNumber = 1;
+                for (const imageWithoutAlt of page.images?.withoutAltText) {
+                    let a = `
+                    <tr>
+                        <td>${serialNumber}</td>
+                        <td>${imageWithoutAlt.imageSrc}</td>
+                        <td><a href=${imageWithoutAlt.imageSrc} target="_blank">
+                            <i class="fa fa-fw fa-eye"></i>
+                        </a></td>
+                    </tr>
+                    `;
+
+                    iwoalt = iwoalt + a;
+                    serialNumber++;
+                }
+
+                tableForImageWithoutAltText = `
+                <h4 class="text-center text-lg my-4">Image without alt text</h4>
+                <table class="mb-4">
+                    <tr>
+                        <th>#</th>
+                        <th>Image src</th>
+                        <th>View image</th>
+                    </tr>
+
+                    ${iwoalt}
+                </table>
+                `;
+            } else {
+                tableForImageWithoutAltText = `
+                <h4 class="text-center text-lg my-4">Image without alt text</h4>
+                <p class="text-center my-4"> No images found with alt text </td>
+                `;
+            }
+
+            if(page.images.withAltText.length === 0 && page.images.withoutAltText.length === 0) {
+                panelContent = '<p class="text-center my-4">No image found on page </td>';
+            } else {
+                panelContent = `
+                    ${tableForImageWithAltText}
+                    ${tableForImageWithoutAltText}
+                    `;
+            }
+        } else {
+            panelContent = '<p class="text-center my-4">No image found on page </p>';
+        }
+
+        let a = `
+        <button class="accordion">${page.url}</button>
+        <div class="panel">
+            ${panelContent}
+        </div>
+        `;
+
+        templateContent = templateContent + a;
+    }
+
+    return templateContent;
 }
 
 module.exports = { reportContent };

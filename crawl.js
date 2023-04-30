@@ -104,21 +104,27 @@ function getAllImagesFromHtml(htmlBody, baseURL) {
         if(imageElement.alt === '' || imageElement.alt === undefined || imageElement.alt === null) {
             // image without alt text
             try {
-                images.withoutAltText.push(imageSrc);
+                let object = {};
+                object.imageSrc = imageSrc;
+                object.altText = imageElement.alt;
+                images.withoutAltText.push(object);
             } catch (error) {
                 console.log(`error with image without alt text: ${error.message}`);
             }
             
         } else {
             // images with alt text
+            let object = {};
+            object.imageSrc = imageSrc;
+            object.altText = imageElement.alt;
             try {
-                images.withAltText.push(imageSrc);
+                images.withAltText.push(object);
             } catch (error) {
                 console.log(`error with absolute url: ${error.message}`);
             }
         }
     }
-
+    
     return images;
 }
 

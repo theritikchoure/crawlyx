@@ -1,7 +1,7 @@
 <h1 align="center">
 	<br>
 	<br>
-	<img width="100" src="https://raw.githubusercontent.com/theritikchoure/theritikchoure/main/media/crawlyx-logo.png" alt="Crawlyx">
+	<img width="100" src="https://raw.githubusercontent.com/theritikchoure/theritikchoure/main/media/crawlyx-logo-rounded.png" alt="Crawlyx">
 	<br>
 	<br>
 	<br>

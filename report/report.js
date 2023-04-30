@@ -6,8 +6,6 @@ const { reportContent } = require("../utils/reportContent");
 function generateReport(baseUrl, pages) {
     const sortedPages = sortPages(pages);
 
-    console.log(sortedPages)
-
     const htmlContent = reportContent(baseUrl, sortedPages);
 
     fs.mkdirSync(`${__dirname}/awesome-report`, { recursive: true },);
