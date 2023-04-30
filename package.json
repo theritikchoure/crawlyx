@@ -1,22 +1,43 @@
 {
   "name": "crawlyx",
   "version": "1.1.0",
-  "description": "",
+  "description": "Crawlyx is an open-source command-line interface (CLI) based web crawler built using Node.js. It is designed to crawl websites and extract useful information like links, images, and text. It is lightweight, fast, and easy to use.",
   "main": "index.js",
   "bin": {
     "crawlyx": "./bin/bash"
   },
+  "author": "theritikchoure",
+  "license": "MIT",
   "scripts": {
     "start": "node main.js",
     "test": "jest"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "web crawler",
+    "web scraping",
+    "data extraction",
+    "SEO analysis",
+    "command-line tool",
+    "Node.js",
+    "HTML reporting",
+    "cross-platform",
+    "configurable options",
+    "plugin system",
+    "open-source"
+  ],
   "devDependencies": {
     "jest": "^29.5.0"
   },
   "dependencies": {
     "jsdom": "^21.1.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theritikchoure/crawlyx.git"
+  },
+  "bugs": {
+    "url": "https://github.com/theritikchoure/crawlyx/issues"
+  },
+  "homepage": "https://theritikchoure.github.io/crawlyx/docs/"
+
 }
