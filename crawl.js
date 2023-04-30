@@ -11,17 +11,23 @@ async function crawlPage(baseUrl, currentUrl, pages) {
 
     const normalizedCurrentUrl = normalizeUrl(currentUrl);
 
-    if(pages[normalizedCurrentUrl] > 0) {
-        pages[normalizedCurrentUrl]++;
+    if(pages[normalizedCurrentUrl]?.occurrence > 0) {
+        pages[normalizedCurrentUrl] = {...pages[normalizedCurrentUrl], occurrence: pages[normalizedCurrentUrl]?.occurrence+1}
         return pages;
     }
 
-    pages[normalizedCurrentUrl] = 1;
+    // pages[normalizedCurrentUrl] = 1;
+    pages[normalizedCurrentUrl] = {
+        occurrence: 1
+    };
 
     console.log(`currently crawling: ${currentUrl}`);
 
     try {
         const res = await fetch(currentUrl);
+
+        pages[normalizedCurrentUrl] = {...pages[normalizedCurrentUrl], statusCode: res.status};
+
         if(res.status > 399) {
             console.log(`error in fetch with status ${res.status} on page ${currentUrl}`);
             return pages;
@@ -34,6 +40,10 @@ async function crawlPage(baseUrl, currentUrl, pages) {
         }   
 
         const htmlBody = await res.text();
+        pages[normalizedCurrentUrl] = {...pages[normalizedCurrentUrl], htmlBody};
+
+        const images = getAllImagesFromHtml(htmlBody, baseUrl);
+        pages[normalizedCurrentUrl] = {...pages[normalizedCurrentUrl], images};
 
         const nextUrls = getURLsFromHTML(htmlBody, baseUrl);
 
@@ -74,6 +84,42 @@ function getURLsFromHTML(htmlBody, baseURL) {
     }
 
     return urls;
+}
+
+function getAllImagesFromHtml(htmlBody, baseURL) {
+    const images = {};
+    images.withAltText = [];
+    images.withoutAltText = [];
+    const dom = new JSDOM(htmlBody);
+    const imageElements = dom.window.document.querySelectorAll('img');
+
+    for (const imageElement of imageElements) {
+        let imageSrc = '';
+        if(imageElement.src.slice(0, 1) === '/') {
+            imageSrc = (new URL(`${baseURL}${imageElement.src}`)).href;
+        } else {
+            imageSrc = (new URL(imageElement.src)).href;
+        }
+
+        if(imageElement.alt === '' || imageElement.alt === undefined || imageElement.alt === null) {
+            // image without alt text
+            try {
+                images.withoutAltText.push(imageSrc);
+            } catch (error) {
+                console.log(`error with image without alt text: ${error.message}`);
+            }
+            
+        } else {
+            // images with alt text
+            try {
+                images.withAltText.push(imageSrc);
+            } catch (error) {
+                console.log(`error with absolute url: ${error.message}`);
+            }
+        }
+    }
+
+    return images;
 }
 
 function normalizeUrl(url) {
