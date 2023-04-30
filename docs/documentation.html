@@ -50,10 +50,17 @@
         <a class="active" href="#introduction" onclick="changeMenu(event)"> <i
                 class="fa fa-fw fa-home"></i>Introduction</a>
         <a href="#features" onclick="changeMenu(event)"><i class="fa fa-fw fa-link"></i>Features</a>
-        <a href="#image-analytics" onclick="changeMenu(event)"><i class="fa fa-fw fa-image"></i>Image analytics</a>
-        <a href="javascript:void(0)" onclick="printDiv('home')"><i class="fa fa-fw fa-print"></i>Print report</a>
-        <a href="#help" onclick="changeMenu(event)"><i class="fa fa-fw fa-question"></i>Help</a>
-        <a href="https://github.com/theritikchoure/crawlyx/blob/main/LICENSE" target="_blank" onclick="changeMenu(event)"><i class="fa fa-id-card-o"></i>License</a>
+        <a href="#installation" onclick="changeMenu(event)"><i class="fa fa-download"></i>Installation</a>
+        <a href="#os-supports" onclick="changeMenu(event)"><i class="fa fa-windows"></i>OS Supports</a>
+        <a href="#internal-working" onclick="changeMenu(event)"><i class="fa fa-cogs"></i>How it works</a>
+        <a href="#examples" onclick="changeMenu(event)"><i class="fa fa-fighter-jet"></i>Example</a>
+        <a href="#edit" onclick="changeMenu(event)"><i class="fa fa-github"></i>Edit on Github</a>
+        <a href="https://github.com/theritikchoure/crawlyx/blob/main/CONTRIBUTING.md" target="_blank"
+            onclick="changeMenu(event)"><i class="fa fa-lightbulb-o"></i>Contribute to crawlyx</a>
+        <a href="https://github.com/theritikchoure/crawlyx/blob/main/CODE_OF_CONDUCT.md" target="_blank"
+            onclick="changeMenu(event)"><i class="fa fa-id-card-o"></i>Code of Conduct</a>
+        <a href="https://github.com/theritikchoure/crawlyx/blob/main/LICENSE" target="_blank"
+            onclick="changeMenu(event)"><i class="fa fa-id-card-o"></i>License</a>
     </div>
 
     <div class="main mb-12" id="home">
@@ -118,6 +125,125 @@
 <code>npm i -g crawlyx</code>
                 </pre>
                 <br>
+        </div>
+
+
+        <!-- OS support -->
+        <div id="os-supports" class="">
+            <h2 class="text-center mb-8 text-3xl font-semibold text-black mt-4"><u>OS supports</u></h1>
+                <div class="table-responsive my-4">
+                    <table class="os-support-table">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="text-center">Windows (7, 8, 10, and Server versions)</th>
+                                <th scope="col" class="text-center">macOS (10.10 and higher)</th>
+                                <th scope="col" class="text-center">Linux (Ubuntu, Debian, Fedora, CentOS, etc.)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-center">✅</td>
+                                <td class="text-center">✅</td>
+                                <td class="text-center">✅</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+        </div>
+
+
+        <!-- How it works -->
+        <div id="internal-working" class="">
+            <h2 class="text-center mb-8 text-3xl font-semibold text-black mt-4"><u>How it works?</u></h1>
+                <ol>
+                    <li><b>1. Parsing the command-line arguments:</b> Crawlyx uses the popular commander.js library to
+                        parse
+                        the command-line arguments and options. This allows users to specify the website URL, the output
+                        format, the crawl depth, and other options.</li>
+                    <br>
+                    <li><b>2. Parsing the command-line arguments:</b> Crawlyx uses the popular commander.js library to
+                        parse
+                        the command-line arguments and options. This allows users to specify the website URL, the output
+                        format, the crawl depth, and other options.</li>
+                    <br>
+                    <li><b>3. Analyzing the website:</b> Crawlyx uses various algorithms to analyze the internal linking
+                        structure of the website, identify broken links, duplicate content, missing tags, and other
+                        issues that may be hurting the SEO ranking of the website.</li>
+                    <br>
+                    <li><b>4. Generating the report:</b> Crawlyx uses the specified output format to generate the
+                        report. This
+                        can be in CSV, JSON, or HTML format, depending on the user's choice. The report contains various
+                        data fields such as page title, meta description, headings, links, images, and other data
+                        extracted from the website.</li>
+                </ol>
+                <br>
+                <img src="./assets/images/code-flow.png" alt="code flow of crawlyx" srcset="">
+                <br>
+                <p>The code flow of Crawlyx is designed to be flexible and customizable, allowing users to extract the
+                    data they need and generate reports that provide valuable insights into the website's performance.
+                </p>
+        </div>
+
+        <!-- Example -->
+        <div id="examples" class="">
+            <h2 class="text-center mb-8 text-3xl font-semibold text-black mt-4"><u>Examples</u></h1>
+                <p>Suppose you want to use Crawlyx to crawl your website and generate a report that will provide
+                    insights into the website's performance.</p>
+                <br>
+                <p>Here's how you could use Crawlyx to achieve this:</p>
+                <br>
+                <p>1. Run Crawlyx with the following command:</p>
+                <br>
+                <pre class="code-area">
+<code>crawlyx https://example.com</code>
+                </pre>
+                <br>
+                <p>This command tells Crawlyx to crawl the website <code>https://example.com</code></p>
+                <br>
+                <p>2. Wait for Crawlyx to finish crawling the website. Depending on the size of the website, this could take several minutes or even hours.</p>
+                <br>
+                <p>3. Once Crawlyx has finished crawling, it will automatically open the <code>report.html</code> file in your default web browser. You'll see a comprehensive report that includes data such as page titles, meta descriptions, headings, links, images, and other elements of the website.</p>
+                <br>
+                <p>4. Use the report to identify areas of the website that need improvement. For example, you might discover that certain pages have missing or duplicate meta descriptions, broken links, or poor internal linking structure</p>
+                <br>
+                <img src="./assets/images/home-screenshot.png" alt="code flow of crawlyx" srcset="">
+                <br>
+                <a href="./report.html" target="_blank"
+                        class="inline-flex items-center justify-center w-full px-6 py-1 mb-2 text-lg text-white bg-green-400 sm:w-auto sm:mb-0">
+                        View dummy report
+                    </a>
+        </div>
+
+        <!-- Edit on github -->
+        <div id="edit" class="">
+            <h2 class="text-center mb-8 text-3xl font-semibold text-black mt-4"><u>Found a problem with this page?</u>
+            </h2>
+            <ul>
+                <li>
+                    <a target="_blank"
+                        href="https://github.com/theritikchoure/crawlyx/edit/main/docs/documentation.html">
+                        Edit on GitHub
+                    </a>
+                </li>
+                <li>
+                    <a target="_blank"
+                        href="https://github.com/theritikchoure/crawlyx/blob/main/docs/documentation.html">
+                        Source on GitHub
+                    </a>
+                </li>
+                <li>
+                    <a target="_blank"
+                        href="https://github.com/theritikchoure/crawlyx/issues/new?assignees=&labels=via+page+report%2Cneeds+triage&template=page-report.yml">
+                        Report a problem with this content on GitHub
+                    </a>
+                </li>
+                <li>
+                    Want to fix the problem yourself? Learn
+                    <a target="_blank" href="https://github.com/theritikchoure/crawlyx/blob/main/CONTRIBUTING.md">
+                        how to contribute!
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
     <footer class="bg-neutral-100 text-center lg:text-left">

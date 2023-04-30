@@ -4,6 +4,7 @@ html {
 
 body {
     margin: 0;
+    font-family: 'Poppins', sans-serif;
 }
 
 table {
@@ -86,7 +87,7 @@ tr:nth-child(even) {
 
 .sidebar a {
     display: block;
-    color: black;
+    color: #5d6778;
     padding: 16px;
     text-decoration: none;
 }
@@ -111,31 +112,16 @@ div.main {
     padding-top: 100px;
 }
 
-@media screen and (max-width: 700px) {
-    .sidebar {
-        width: 100%;
-        height: auto;
-        position: relative;
-    }
-
-    .sidebar a {
-        float: left;
-    }
-
-    div.main {
-        margin-left: 0;
-    }
-}
-
 #btn-back-to-top {
     position: fixed;
     display: none;
 }
 
-#introduction, #features {
+#introduction, #features, #installation, #os-supports, #internal-working, #examples, #edit {
     color: #5d6778;
-    font-size: 16px;
+    font-size: 17px;
     line-height: 30px;
+    margin-bottom: 25px;
 }
 
 .code-area {
@@ -149,4 +135,33 @@ div.main {
     overflow-x: auto!important;
     margin-top: 20px;
     margin-bottom: 20px;
+}
+
+#edit a {
+    color: green;
+    text-decoration: underline;
+    line-height: 30px;
+}
+
+.os-support-table thead th, .os-support-table tbody td {
+    border: 1px solid #e7e9ed;
+}
+
+@media screen and (max-width: 700px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        margin-top: 0;
+        padding-top: 80px;
+    }
+
+    .sidebar a {
+        float: left;
+    }
+
+    div.main {
+        margin-left: 0;
+        padding: 0 35px;
+    }
 }
