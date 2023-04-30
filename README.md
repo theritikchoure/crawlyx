@@ -14,6 +14,29 @@ Crawlyx is an open-source command-line interface (CLI) based web crawler built u
 [![GitHub license](https://img.shields.io/github/license/theritikchoure/crawlyx.svg)](https://github.com/theritikchoure/crawlyx/blob/master/LICENSE)
 [![Maintainer](https://img.shields.io/badge/maintainer-theiritikchoure-green)](https://github.com/theritikchoure)
 
+## Installation
+
+```bash
+npm i -g crawlyx
+```
+
+make sure you install it globally.
+
+To check successful installation of crawlyx, open command prompt or windows terminal.
+
+Type in your cmd -
+
+```bash
+crawlyx --version
+```
+
+## CLI Usage
+Start crawling by the following command -
+
+```bash
+crawlyx <valid-website>
+```
+
 ## Author
 
 - [@theritikchoure](https://github.com/theritikchoure)
