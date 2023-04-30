@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crawlyx - Official Documentation</title>
+    <!-- favicon -->
+    <link rel="icon" type="image/x-icon"
+        href="./assets/images/crawlyx-logo-rounded.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 100%;
+            border: 1px solid #ddd;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 16px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 183px;
+            background-color: #e2e2e2;
+            color: black;
+            text-align: center;
+            border-radius: 6px;
+            padding: 15px 15px;
+            position: absolute;
+            z-index: 1;
+            bottom: 95%;
+            font-weight: 400;
+            left: 50%;
+            font-size: 14px;
+            margin-left: -111px;
+        }
+
+        .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #e2e2e2 transparent transparent transparent;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+        }
+
+
+        .sidebar {
+            margin: 0;
+            padding: 0;
+            width: 200px;
+            background-color: #f1f1f1;
+            position: fixed;
+            height: 100%;
+            overflow: auto;
+        }
+
+        .sidebar a {
+            display: block;
+            color: black;
+            padding: 16px;
+            text-decoration: none;
+        }
+
+        .sidebar a.active {
+            background-color: #04AA6D;
+            color: white;
+        }
+
+        .sidebar a:hover:not(.active) {
+            background-color: #555;
+            color: white;
+        }
+
+        .sidebar a i {
+            margin-right: 7px;
+        }
+
+        div.main {
+            margin-left: 200px;
+            padding: 1px 16px;
+        }
+
+        @media screen and (max-width: 700px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+
+            .sidebar a {
+                float: left;
+            }
+
+            div.main {
+                margin-left: 0;
+            }
+        }
+
+        #btn-back-to-top {
+            position: fixed;
+            display: none;
+        }
+
+        .accordion {
+            color: #444;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+            transition: 0.4s;
+            border-bottom: 1px solid #e2e2e2;
+        }
+
+        .active,
+        .accordion:hover {
+            background-color: #ccc;
+        }
+
+        .accordion:after {
+            content: '+';
+            color: #777;
+            font-weight: bold;
+            float: right;
+            margin-left: 5px;
+        }
+
+        .accordion.active:after {
+            content: "−";
+        }
+
+
+        .panel {
+            padding: 0 18px;
+            background-color: white;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="sidebar">
+        <a class="active" href="#home" onclick="changeMenu(event)"> <i class="fa fa-fw fa-home"></i>Home</a>
+        <a href="#links" onclick="changeMenu(event)"><i class="fa fa-fw fa-link"></i>Links</a>
+        <a href="#image-analytics" onclick="changeMenu(event)"><i class="fa fa-fw fa-image"></i>Image analytics</a>
+        <a href="javascript:void(0)" onclick="printDiv('home')"><i class="fa fa-fw fa-print"></i>Print report</a>
+        <a href="#help" onclick="changeMenu(event)"><i class="fa fa-fw fa-question"></i>Help</a>
+    </div>
+
+    <div class="main mb-12" id="home">
+        <h1 class="text-center text-3xl font-semibold text-black mt-4"><u>Crawlyx - Official Documentation</u></h1>
+
+        <div id="data-display">
+            <div class="max-w-full mx-4 py-6 sm:mx-auto sm:px-6 lg:px-8">
+                <div class="sm:flex sm:space-x-4">
+                    <div
+                        class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow transform transition-all mb-4 w-full sm:w-1/3 sm:my-8">
+                        <div class="bg-white p-5">
+                            <div class="sm:flex sm:items-start">
+                                <div class="text-center sm:mt-0 sm:ml-2 sm:text-left">
+                                    <h3 class="text-sm leading-6 font-medium text-gray-400">Base url</h3>
+                                    <p class="text-xl font-bold text-black">https://wagslane.dev</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow transform transition-all mb-4 w-full sm:w-1/3 sm:my-8">
+                        <div class="bg-white p-5">
+                            <div class="sm:flex sm:items-start">
+                                <div class="text-center sm:mt-0 sm:ml-2 sm:text-left">
+                                    <h3 class="text-sm leading-6 font-medium text-gray-400">Total Links Crawled</h3>
+                                    <p class="text-xl font-bold text-black">32</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow transform transition-all mb-4 w-full sm:w-1/3 sm:my-8">
+                        <div class="bg-white p-5">
+                            <div class="sm:flex sm:items-start">
+                                <div class="text-center sm:mt-0 sm:ml-2 sm:text-left">
+                                    <h3 class="text-sm leading-6 font-medium text-gray-400">Report generated at</h3>
+                                    <p class="text-xl font-bold text-black">30/4/2023, 10:40:31 pm</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="links mb-8 bg-white p-6 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]"
+            id="links">
+            <h3 class="text-center text-2xl font-semibold text-black mb-8">Crawled links</h3>
+            <table>
+                <tr>
+                    <th>#</th>
+                    <th>Link</th>
+                    <th class="tooltip">
+                        Occurrence
+                        <span class="tooltiptext">How many times a certain page is linked to the site</span>
+                    </th>
+                    <th>
+                        Status code
+                    </th>
+                </tr>
+
+                <tr>
+                    <td>1</td>
+                    <td>wagslane.dev</td>
+                    <td>63</td>
+                    <td>200</td>
+                </tr>
+
+                <tr>
+                    <td>2</td>
+                    <td>wagslane.dev/tags</td>
+                    <td>62</td>
+                    <td>200</td>
+                </tr>
+
+                <tr>
+                    <td>3</td>
+                    <td>wagslane.dev/about</td>
+                    <td>62</td>
+                    <td>200</td>
+                </tr>
+
+                <tr>
+                    <td>4</td>
+                    <td>wagslane.dev/index.xml</td>
+                    <td>62</td>
+                    <td>200</td>
+                </tr>
+
+                <tr>
+                    <td>5</td>
+                    <td>wagslane.dev/posts/leave-scrum-to-rugby</td>
+                    <td>5</td>
+                    <td>200</td>
+                </tr>
+
+                <tr>
+                    <td>6</td>
+                    <td>wagslane.dev/posts/managers-that-cant-code</td>
+                    <td>4</td>
+                    <td>200</td>
+                </tr>
+
+                <tr>
+                    <td>7</td>
+                    <td>wagslane.dev/posts/kanban-vs-scrum</td>
+                    <td>4</td>
+                    <td>200</td>
+                </tr>
+
+                <tr>
+                    <td>8</td>
+                    <td>wagslane.dev/posts/continuous-deployments-arent-continuous-disruptions</td>
+                    <td>3</td>
+                    <td>200</td>
+                </tr>
+
+                <tr>
+                    <td>9</td>
+                    <td>wagslane.dev/posts/dark-patterns</td>
+                    <td>2</td>
+                    <td>200</td>
+                </tr>
+
+                <tr>
+                    <td>10</td>
+                    <td>wagslane.dev/posts/things-i-dont-want-to-do-to-grow-business</td>
+                    <td>2</td>
+                    <td>200</td>
+                </tr>
+
+                <tr>
+                    <td>11</td>
+                    <td>wagslane.dev/posts/zen-of-proverbs</td>
+                    <td>2</td>
+                    <td>200</td>
+                </tr>
+
+                <tr>
+                    <td>12</td>
+                    <td>wagslane.dev/posts/func-y-json-api</td>
+                    <td>2</td>
+                    <td>200</td>
+                </tr>
+
+                <tr>
+                    <td>13</td>
+                    <td>wagslane.dev/posts/keep-your-data-raw-at-rest</td>
+                    <td>2</td>
+                    <td>200</td>
+                </tr>
+
+                <tr>
+                    <td>14</td>
+                    <td>wagslane.dev/posts/optimize-for-simplicit-first</td>
+                    <td>2</td>
+                    <td>200</td>
+                </tr>
+
+                <tr>
+                    <td>15</td>
+                    <td>wagslane.dev/posts/no-one-does-devops</td>
+                    <td>2</td>
+                    <td>200</td>
+                </tr>
+
+                <tr>
+                    <td>16</td>
+                    <td>wagslane.dev/posts/college-a-solution-in-search-of-a-problem</td>
+                    <td>2</td>
+                    <td>200</td>
+                </tr>
+
+                <tr>
+                    <td>17</td>
+                    <td>wagslane.dev/posts/guard-keyword-error-handling-golang</td>
+                    <td>2</td>
+                    <td>200</td>
+                </tr>
+
+                <tr>
+                    <td>18</td>
+                    <td>wagslane.dev/posts/gos-major-version-handling</td>
+                    <td>2</td>
+                    <td>200</td>
+                </tr>
+
+                <tr>
+                    <td>19</td>
+                    <td>wagslane.dev/posts/go-struct-ordering</td>
+                    <td>2</td>
+                    <td>200</td>
+                </tr>
+
+                <tr>
+                    <td>20</td>
+                    <td>wagslane.dev/posts/what-a-crazy-religion</td>
+                    <td>2</td>
+                    <td>200</td>
+                </tr>
+
+                <tr>
+                    <td>21</td>
+                    <td>wagslane.dev/posts/a-case-against-a-case-for-the-book-of-mormon</td>
+                    <td>2</td>
+                    <td>200</td>
+                </tr>
+
+                <tr>
+                    <td>22</td>
+                    <td>wagslane.dev/posts/seo-is-a-scam-job</td>
+                    <td>2</td>
+                    <td>200</td>
+                </tr>
+
+                <tr>
+                    <td>23</td>
+                    <td>wagslane.dev/posts/collapsing-quality-of-devto</td>
+                    <td>2</td>
+                    <td>200</td>
+                </tr>
+
+                <tr>
+                    <td>24</td>
+                    <td>wagslane.dev/tags/business</td>
+                    <td>1</td>
+                    <td>200</td>
+                </tr>
+
+                <tr>
+                    <td>25</td>
+                    <td>wagslane.dev/tags/clean-code</td>
+                    <td>1</td>
+                    <td>200</td>
+                </tr>
+
+                <tr>
+                    <td>26</td>
+                    <td>wagslane.dev/tags/devops</td>
+                    <td>1</td>
+                    <td>200</td>
+                </tr>
+
+                <tr>
+                    <td>27</td>
+                    <td>wagslane.dev/tags/education</td>
+                    <td>1</td>
+                    <td>200</td>
+                </tr>
+
+                <tr>
+                    <td>28</td>
+                    <td>wagslane.dev/tags/golang</td>
+                    <td>1</td>
+                    <td>200</td>
+                </tr>
+
+                <tr>
+                    <td>29</td>
+                    <td>wagslane.dev/tags/management</td>
+                    <td>1</td>
+                    <td>200</td>
+                </tr>
+
+                <tr>
+                    <td>30</td>
+                    <td>wagslane.dev/tags/philosophy</td>
+                    <td>1</td>
+                    <td>200</td>
+                </tr>
+
+                <tr>
+                    <td>31</td>
+                    <td>wagslane.dev/tags/writing</td>
+                    <td>1</td>
+                    <td>200</td>
+                </tr>
+
+                <tr>
+                    <td>32</td>
+                    <td>wagslane.dev/posts/developers-learn-to-say-no</td>
+                    <td>1</td>
+                    <td>200</td>
+                </tr>
+
+            </table>
+        </div>
+
+
+        <div class="links mb-8 bg-white p-6 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]"
+            id="image-analytics">
+            <h3 class="text-center text-2xl font-semibold text-black mb-8">Image Analysis</h3>
+
+
+            <button class="accordion">wagslane.dev</button>
+            <div class="panel">
+                <p class="text-center my-4">No image found on page </td>
+            </div>
+
+            <button class="accordion">wagslane.dev/tags</button>
+            <div class="panel">
+                <p class="text-center my-4">No image found on page </td>
+            </div>
+
+            <button class="accordion">wagslane.dev/about</button>
+            <div class="panel">
+
+
+                <h4 class="text-center text-lg my-4">Image with alt text</h4>
+                <table class="mb-4">
+                    <tr>
+                        <th>#</th>
+                        <th>Image src</th>
+                        <th>Alt text</th>
+                        <th>View image</th>
+                    </tr>
+
+
+                    <tr>
+                        <td>1</td>
+                        <td>https://wagslane.dev/img/800/headshot.png.webp.webp</td>
+                        <td>Lane Wagner</td>
+                        <td><a href=https://wagslane.dev/img/800/headshot.png.webp.webp target="_blank">
+                                <i class="fa fa-fw fa-eye"></i>
+                            </a></td>
+                    </tr>
+
+                </table>
+
+
+                <h4 class="text-center text-lg my-4">Image without alt text</h4>
+                <p class="text-center my-4"> No images found with alt text </td>
+
+
+            </div>
+
+            <button class="accordion">wagslane.dev/index.xml</button>
+            <div class="panel">
+                <p class="text-center my-4">No image found on page </p>
+            </div>
+
+            <button class="accordion">wagslane.dev/posts/leave-scrum-to-rugby</button>
+            <div class="panel">
+
+
+                <h4 class="text-center text-lg my-4">Image with alt text</h4>
+                <table class="mb-4">
+                    <tr>
+                        <th>#</th>
+                        <th>Image src</th>
+                        <th>Alt text</th>
+                        <th>View image</th>
+                    </tr>
+
+
+                    <tr>
+                        <td>1</td>
+                        <td>https://wagslane.dev/img/800/scrum-table.png.webp</td>
+                        <td>scrum table</td>
+                        <td><a href=https://wagslane.dev/img/800/scrum-table.png.webp target="_blank">
+                                <i class="fa fa-fw fa-eye"></i>
+                            </a></td>
+                    </tr>
+
+                    <tr>
+                        <td>2</td>
+                        <td>https://wagslane.dev/img/800/scrum-table2.png.webp</td>
+                        <td>scrum table 2</td>
+                        <td><a href=https://wagslane.dev/img/800/scrum-table2.png.webp target="_blank">
+                                <i class="fa fa-fw fa-eye"></i>
+                            </a></td>
+                    </tr>
+
+                    <tr>
+                        <td>3</td>
+                        <td>https://wagslane.dev/img/800/estimating-time.png.webp</td>
+                        <td>estimating time</td>
+                        <td><a href=https://wagslane.dev/img/800/estimating-time.png.webp target="_blank">
+                                <i class="fa fa-fw fa-eye"></i>
+                            </a></td>
+                    </tr>
+
+                    <tr>
+                        <td>4</td>
+                        <td>https://wagslane.dev/img/800/points-dont-matter.jpeg.webp</td>
+                        <td>points don’t matter</td>
+                        <td><a href=https://wagslane.dev/img/800/points-dont-matter.jpeg.webp target="_blank">
+                                <i class="fa fa-fw fa-eye"></i>
+                            </a></td>
+                    </tr>
+
+                </table>
+
+
+                <h4 class="text-center text-lg my-4">Image without alt text</h4>
+                <table class="mb-4">
+                    <tr>
+                        <th>#</th>
+                        <th>Image src</th>
+                        <th>View image</th>
+                    </tr>
+
+
+                    <tr>
+                        <td>1</td>
+                        <td>https://wagslane.dev/img/800/rugby.jpg.webp</td>
+                        <td><a href=https://wagslane.dev/img/800/rugby.jpg.webp target="_blank">
+                                <i class="fa fa-fw fa-eye"></i>
+                            </a></td>
+                    </tr>
+
+                </table>
+
+
+            </div>
+
+            <button class="accordion">wagslane.dev/posts/managers-that-cant-code</button>
+            <div class="panel">
+
+
+                <h4 class="text-center text-lg my-4">Image with alt text</h4>
+                <table class="mb-4">
+                    <tr>
+                        <th>#</th>
+                        <th>Image src</th>
+                        <th>Alt text</th>
+                        <th>View image</th>
+                    </tr>
+
+
+                    <tr>
+                        <td>1</td>
+                        <td>https://wagslane.dev/img/800/joke-extrovert.jpg.webp</td>
+                        <td>joke extrovert</td>
+                        <td><a href=https://wagslane.dev/img/800/joke-extrovert.jpg.webp target="_blank">
+                                <i class="fa fa-fw fa-eye"></i>
+                            </a></td>
+                    </tr>
+
+                    <tr>
+                        <td>2</td>
+                        <td>https://wagslane.dev/img/800/dilbert-joke.webp.webp</td>
+                        <td>Dilbert</td>
+                        <td><a href=https://wagslane.dev/img/800/dilbert-joke.webp.webp target="_blank">
+                                <i class="fa fa-fw fa-eye"></i>
+                            </a></td>
+                    </tr>
+
+                </table>
+
+
+                <h4 class="text-center text-lg my-4">Image without alt text</h4>
+                <table class="mb-4">
+                    <tr>
+                        <th>#</th>
+                        <th>Image src</th>
+                        <th>View image</th>
+                    </tr>
+
+
+                    <tr>
+                        <td>1</td>
+                        <td>https://wagslane.dev/img/800/people-person.jpg.webp</td>
+                        <td><a href=https://wagslane.dev/img/800/people-person.jpg.webp target="_blank">
+                                <i class="fa fa-fw fa-eye"></i>
+                            </a></td>
+                    </tr>
+
+                </table>
+
+
+            </div>
+
+            <button class="accordion">wagslane.dev/posts/kanban-vs-scrum</button>
+            <div class="panel">
+
+
+                <h4 class="text-center text-lg my-4">Image with alt text</h4>
+                <p class="text-center my-4">No images found with alt text </td>
+
+
+                <h4 class="text-center text-lg my-4">Image without alt text</h4>
+                <table class="mb-4">
+                    <tr>
+                        <th>#</th>
+                        <th>Image src</th>
+                        <th>View image</th>
+                    </tr>
+
+
+                    <tr>
+                        <td>1</td>
+                        <td>https://wagslane.dev/img/800/kanban.avif.webp</td>
+                        <td><a href=https://wagslane.dev/img/800/kanban.avif.webp target="_blank">
+                                <i class="fa fa-fw fa-eye"></i>
+                            </a></td>
+                    </tr>
+
+                </table>
+
+
+            </div>
+
+            <button class="accordion">wagslane.dev/posts/continuous-deployments-arent-continuous-disruptions</button>
+            <div class="panel">
+
+
+                <h4 class="text-center text-lg my-4">Image with alt text</h4>
+                <p class="text-center my-4">No images found with alt text </td>
+
+
+                <h4 class="text-center text-lg my-4">Image without alt text</h4>
+                <table class="mb-4">
+                    <tr>
+                        <th>#</th>
+                        <th>Image src</th>
+                        <th>View image</th>
+                    </tr>
+
+
+                    <tr>
+                        <td>1</td>
+                        <td>https://wagslane.dev/img/800/loop.avif.webp</td>
+                        <td><a href=https://wagslane.dev/img/800/loop.avif.webp target="_blank">
+                                <i class="fa fa-fw fa-eye"></i>
+                            </a></td>
+                    </tr>
+
+                </table>
+
+
+            </div>
+
+            <button class="accordion">wagslane.dev/posts/dark-patterns</button>
+            <div class="panel">
+
+
+                <h4 class="text-center text-lg my-4">Image with alt text</h4>
+                <table class="mb-4">
+                    <tr>
+                        <th>#</th>
+                        <th>Image src</th>
+                        <th>Alt text</th>
+                        <th>View image</th>
+                    </tr>
+
+
+                    <tr>
+                        <td>1</td>
+                        <td>https://i.imgflip.com/6jzpll.jpg</td>
+                        <td>thanos meme</td>
+                        <td><a href=https://i.imgflip.com/6jzpll.jpg target="_blank">
+                                <i class="fa fa-fw fa-eye"></i>
+                            </a></td>
+                    </tr>
+
+                </table>
+
+
+                <h4 class="text-center text-lg my-4">Image without alt text</h4>
+                <table class="mb-4">
+                    <tr>
+                        <th>#</th>
+                        <th>Image src</th>
+                        <th>View image</th>
+                    </tr>
+
+
+                    <tr>
+                        <td>1</td>
+                        <td>https://wagslane.dev/img/800/photo-1567095751004-aa51a2690368.avif.webp</td>
+                        <td><a href=https://wagslane.dev/img/800/photo-1567095751004-aa51a2690368.avif.webp
+                                target="_blank">
+                                <i class="fa fa-fw fa-eye"></i>
+                            </a></td>
+                    </tr>
+
+                </table>
+
+
+            </div>
+
+            <button class="accordion">wagslane.dev/posts/things-i-dont-want-to-do-to-grow-business</button>
+            <div class="panel">
+
+
+                <h4 class="text-center text-lg my-4">Image with alt text</h4>
+                <p class="text-center my-4">No images found with alt text </td>
+
+
+                <h4 class="text-center text-lg my-4">Image without alt text</h4>
+                <table class="mb-4">
+                    <tr>
+                        <th>#</th>
+                        <th>Image src</th>
+                        <th>View image</th>
+                    </tr>
+
+
+                    <tr>
+                        <td>1</td>
+                        <td>https://wagslane.dev/img/800/grow.avif.webp</td>
+                        <td><a href=https://wagslane.dev/img/800/grow.avif.webp target="_blank">
+                                <i class="fa fa-fw fa-eye"></i>
+                            </a></td>
+                    </tr>
+
+                </table>
+
+
+            </div>
+
+            <button class="accordion">wagslane.dev/posts/zen-of-proverbs</button>
+            <div class="panel">
+
+
+                <h4 class="text-center text-lg my-4">Image with alt text</h4>
+                <p class="text-center my-4">No images found with alt text </td>
+
+
+                <h4 class="text-center text-lg my-4">Image without alt text</h4>
+                <table class="mb-4">
+                    <tr>
+                        <th>#</th>
+                        <th>Image src</th>
+                        <th>View image</th>
+                    </tr>
+
+
+                    <tr>
+                        <td>1</td>
+                        <td>https://wagslane.dev/img/800/zenofproverbs.png.webp</td>
+                        <td><a href=https://wagslane.dev/img/800/zenofproverbs.png.webp target="_blank">
+                                <i class="fa fa-fw fa-eye"></i>
+                            </a></td>
+                    </tr>
+
+                </table>
+
+
+            </div>
+
+            <button class="accordion">wagslane.dev/posts/func-y-json-api</button>
+            <div class="panel">
+
+
+                <h4 class="text-center text-lg my-4">Image with alt text</h4>
+                <p class="text-center my-4">No images found with alt text </td>
+
+
+                <h4 class="text-center text-lg my-4">Image without alt text</h4>
+                <table class="mb-4">
+                    <tr>
+                        <th>#</th>
+                        <th>Image src</th>
+                        <th>View image</th>
+                    </tr>
+
+
+                    <tr>
+                        <td>1</td>
+                        <td>https://wagslane.dev/img/800/funky.avif.webp</td>
+                        <td><a href=https://wagslane.dev/img/800/funky.avif.webp target="_blank">
+                                <i class="fa fa-fw fa-eye"></i>
+                            </a></td>
+                    </tr>
+
+                </table>
+
+
+            </div>
+
+            <button class="accordion">wagslane.dev/posts/keep-your-data-raw-at-rest</button>
+            <div class="panel">
+
+
+                <h4 class="text-center text-lg my-4">Image with alt text</h4>
+                <p class="text-center my-4">No images found with alt text </td>
+
+
+                <h4 class="text-center text-lg my-4">Image without alt text</h4>
+                <table class="mb-4">
+                    <tr>
+                        <th>#</th>
+                        <th>Image src</th>
+                        <th>View image</th>
+                    </tr>
+
+
+                    <tr>
+                        <td>1</td>
+                        <td>https://wagslane.dev/img/800/rest.avif.webp</td>
+                        <td><a href=https://wagslane.dev/img/800/rest.avif.webp target="_blank">
+                                <i class="fa fa-fw fa-eye"></i>
+                            </a></td>
+                    </tr>
+
+                </table>
+
+
+            </div>
+
+            <button class="accordion">wagslane.dev/posts/optimize-for-simplicit-first</button>
+            <div class="panel">
+
+
+                <h4 class="text-center text-lg my-4">Image with alt text</h4>
+                <p class="text-center my-4">No images found with alt text </td>
+
+
+                <h4 class="text-center text-lg my-4">Image without alt text</h4>
+                <table class="mb-4">
+                    <tr>
+                        <th>#</th>
+                        <th>Image src</th>
+                        <th>View image</th>
+                    </tr>
+
+
+                    <tr>
+                        <td>1</td>
+                        <td>https://wagslane.dev/img/800/people-person.jpg.webp</td>
+                        <td><a href=https://wagslane.dev/img/800/people-person.jpg.webp target="_blank">
+                                <i class="fa fa-fw fa-eye"></i>
+                            </a></td>
+                    </tr>
+
+                </table>
+
+
+            </div>
+
+            <button class="accordion">wagslane.dev/posts/no-one-does-devops</button>
+            <div class="panel">
+
+
+                <h4 class="text-center text-lg my-4">Image with alt text</h4>
+                <p class="text-center my-4">No images found with alt text </td>
+
+
+                <h4 class="text-center text-lg my-4">Image without alt text</h4>
+                <table class="mb-4">
+                    <tr>
+                        <th>#</th>
+                        <th>Image src</th>
+                        <th>View image</th>
+                    </tr>
+
+
+                    <tr>
+                        <td>1</td>
+                        <td>https://wagslane.dev/img/800/gears.jpeg.webp</td>
+                        <td><a href=https://wagslane.dev/img/800/gears.jpeg.webp target="_blank">
+                                <i class="fa fa-fw fa-eye"></i>
+                            </a></td>
+                    </tr>
+
+                </table>
+
+
+            </div>
+
+            <button class="accordion">wagslane.dev/posts/college-a-solution-in-search-of-a-problem</button>
+            <div class="panel">
+
+
+                <h4 class="text-center text-lg my-4">Image with alt text</h4>
+                <table class="mb-4">
+                    <tr>
+                        <th>#</th>
+                        <th>Image src</th>
+                        <th>Alt text</th>
+                        <th>View image</th>
+                    </tr>
+
+
+                    <tr>
+                        <td>1</td>
+                        <td>https://media.tenor.com/88DfzQS5tlQAAAAC/adventure-time-demon-cat.gif</td>
+                        <td>approximate knowledge of many things</td>
+                        <td><a href=https://media.tenor.com/88DfzQS5tlQAAAAC/adventure-time-demon-cat.gif
+                                target="_blank">
+                                <i class="fa fa-fw fa-eye"></i>
+                            </a></td>
+                    </tr>
+
+                </table>
+
+
+                <h4 class="text-center text-lg my-4">Image without alt text</h4>
+                <table class="mb-4">
+                    <tr>
+                        <th>#</th>
+                        <th>Image src</th>
+                        <th>View image</th>
+                    </tr>
+
+
+                    <tr>
+                        <td>1</td>
+                        <td>https://wagslane.dev/img/800/uniersirtycrumble.png.webp</td>
+                        <td><a href=https://wagslane.dev/img/800/uniersirtycrumble.png.webp target="_blank">
+                                <i class="fa fa-fw fa-eye"></i>
+                            </a></td>
+                    </tr>
+
+                </table>
+
+
+            </div>
+
+            <button class="accordion">wagslane.dev/posts/guard-keyword-error-handling-golang</button>
+            <div class="panel">
+
+
+                <h4 class="text-center text-lg my-4">Image with alt text</h4>
+                <table class="mb-4">
+                    <tr>
+                        <th>#</th>
+                        <th>Image src</th>
+                        <th>Alt text</th>
+                        <th>View image</th>
+                    </tr>
+
+
+                    <tr>
+                        <td>1</td>
+                        <td>https://wagslane.dev/img/800/gopher.png.webp</td>
+                        <td>Art by stable diffusion. Prompt: 'Gopher running and falling photo 4k'</td>
+                        <td><a href=https://wagslane.dev/img/800/gopher.png.webp target="_blank">
+                                <i class="fa fa-fw fa-eye"></i>
+                            </a></td>
+                    </tr>
+
+                </table>
+
+
+                <h4 class="text-center text-lg my-4">Image without alt text</h4>
+                <p class="text-center my-4"> No images found with alt text </td>
+
+
+            </div>
+
+            <button class="accordion">wagslane.dev/posts/gos-major-version-handling</button>
+            <div class="panel">
+
+
+                <h4 class="text-center text-lg my-4">Image with alt text</h4>
+                <p class="text-center my-4">No images found with alt text </td>
+
+
+                <h4 class="text-center text-lg my-4">Image without alt text</h4>
+                <table class="mb-4">
+                    <tr>
+                        <th>#</th>
+                        <th>Image src</th>
+                        <th>View image</th>
+                    </tr>
+
+
+                    <tr>
+                        <td>1</td>
+                        <td>https://wagslane.dev/img/800/handling.avif.webp</td>
+                        <td><a href=https://wagslane.dev/img/800/handling.avif.webp target="_blank">
+                                <i class="fa fa-fw fa-eye"></i>
+                            </a></td>
+                    </tr>
+
+                </table>
+
+
+            </div>
+
+            <button class="accordion">wagslane.dev/posts/go-struct-ordering</button>
+            <div class="panel">
+
+
+                <h4 class="text-center text-lg my-4">Image with alt text</h4>
+                <table class="mb-4">
+                    <tr>
+                        <th>#</th>
+                        <th>Image src</th>
+                        <th>Alt text</th>
+                        <th>View image</th>
+                    </tr>
+
+
+                    <tr>
+                        <td>1</td>
+                        <td>https://wagslane.dev/img/800/memory-usage-go.png.webp</td>
+                        <td>mem1</td>
+                        <td><a href=https://wagslane.dev/img/800/memory-usage-go.png.webp target="_blank">
+                                <i class="fa fa-fw fa-eye"></i>
+                            </a></td>
+                    </tr>
+
+                    <tr>
+                        <td>2</td>
+                        <td>https://wagslane.dev/img/800/memory-usage-go-2.png.webp</td>
+                        <td>mem1</td>
+                        <td><a href=https://wagslane.dev/img/800/memory-usage-go-2.png.webp target="_blank">
+                                <i class="fa fa-fw fa-eye"></i>
+                            </a></td>
+                    </tr>
+
+                </table>
+
+
+                <h4 class="text-center text-lg my-4">Image without alt text</h4>
+                <table class="mb-4">
+                    <tr>
+                        <th>#</th>
+                        <th>Image src</th>
+                        <th>View image</th>
+                    </tr>
+
+
+                    <tr>
+                        <td>1</td>
+                        <td>https://wagslane.dev/img/800/tetris.jpg.webp</td>
+                        <td><a href=https://wagslane.dev/img/800/tetris.jpg.webp target="_blank">
+                                <i class="fa fa-fw fa-eye"></i>
+                            </a></td>
+                    </tr>
+
+                </table>
+
+
+            </div>
+
+            <button class="accordion">wagslane.dev/posts/what-a-crazy-religion</button>
+            <div class="panel">
+
+
+                <h4 class="text-center text-lg my-4">Image with alt text</h4>
+                <p class="text-center my-4">No images found with alt text </td>
+
+
+                <h4 class="text-center text-lg my-4">Image without alt text</h4>
+                <table class="mb-4">
+                    <tr>
+                        <th>#</th>
+                        <th>Image src</th>
+                        <th>View image</th>
+                    </tr>
+
+
+                    <tr>
+                        <td>1</td>
+                        <td>https://wagslane.dev/img/800/templemormon.avif.webp</td>
+                        <td><a href=https://wagslane.dev/img/800/templemormon.avif.webp target="_blank">
+                                <i class="fa fa-fw fa-eye"></i>
+                            </a></td>
+                    </tr>
+
+                </table>
+
+
+            </div>
+
+            <button class="accordion">wagslane.dev/posts/a-case-against-a-case-for-the-book-of-mormon</button>
+            <div class="panel">
+
+
+                <h4 class="text-center text-lg my-4">Image with alt text</h4>
+                <table class="mb-4">
+                    <tr>
+                        <th>#</th>
+                        <th>Image src</th>
+                        <th>Alt text</th>
+                        <th>View image</th>
+                    </tr>
+
+
+                    <tr>
+                        <td>1</td>
+                        <td>https://miro.medium.com/max/1400/1*B4HLREOmG_oNPppJXt5DSQ.jpeg</td>
+                        <td>img</td>
+                        <td><a href=https://miro.medium.com/max/1400/1*B4HLREOmG_oNPppJXt5DSQ.jpeg target="_blank">
+                                <i class="fa fa-fw fa-eye"></i>
+                            </a></td>
+                    </tr>
+
+                </table>
+
+
+                <h4 class="text-center text-lg my-4">Image without alt text</h4>
+                <table class="mb-4">
+                    <tr>
+                        <th>#</th>
+                        <th>Image src</th>
+                        <th>View image</th>
+                    </tr>
+
+
+                    <tr>
+                        <td>1</td>
+                        <td>https://wagslane.dev/img/800/case-bom.png.webp</td>
+                        <td><a href=https://wagslane.dev/img/800/case-bom.png.webp target="_blank">
+                                <i class="fa fa-fw fa-eye"></i>
+                            </a></td>
+                    </tr>
+
+                </table>
+
+
+            </div>
+
+            <button class="accordion">wagslane.dev/posts/seo-is-a-scam-job</button>
+            <div class="panel">
+
+
+                <h4 class="text-center text-lg my-4">Image with alt text</h4>
+                <p class="text-center my-4">No images found with alt text </td>
+
+
+                <h4 class="text-center text-lg my-4">Image without alt text</h4>
+                <table class="mb-4">
+                    <tr>
+                        <th>#</th>
+                        <th>Image src</th>
+                        <th>View image</th>
+                    </tr>
+
+
+                    <tr>
+                        <td>1</td>
+                        <td>https://wagslane.dev/img/800/seo.avif.webp</td>
+                        <td><a href=https://wagslane.dev/img/800/seo.avif.webp target="_blank">
+                                <i class="fa fa-fw fa-eye"></i>
+                            </a></td>
+                    </tr>
+
+                </table>
+
+
+            </div>
+
+            <button class="accordion">wagslane.dev/posts/collapsing-quality-of-devto</button>
+            <div class="panel">
+
+
+                <h4 class="text-center text-lg my-4">Image with alt text</h4>
+                <p class="text-center my-4">No images found with alt text </td>
+
+
+                <h4 class="text-center text-lg my-4">Image without alt text</h4>
+                <table class="mb-4">
+                    <tr>
+                        <th>#</th>
+                        <th>Image src</th>
+                        <th>View image</th>
+                    </tr>
+
+
+                    <tr>
+                        <td>1</td>
+                        <td>https://wagslane.dev/img/800/photo-1571686683059-4b1bf2086a13.avif.webp</td>
+                        <td><a href=https://wagslane.dev/img/800/photo-1571686683059-4b1bf2086a13.avif.webp
+                                target="_blank">
+                                <i class="fa fa-fw fa-eye"></i>
+                            </a></td>
+                    </tr>
+
+                </table>
+
+
+            </div>
+
+            <button class="accordion">wagslane.dev/tags/business</button>
+            <div class="panel">
+                <p class="text-center my-4">No image found on page </td>
+            </div>
+
+            <button class="accordion">wagslane.dev/tags/clean-code</button>
+            <div class="panel">
+                <p class="text-center my-4">No image found on page </td>
+            </div>
+
+            <button class="accordion">wagslane.dev/tags/devops</button>
+            <div class="panel">
+                <p class="text-center my-4">No image found on page </td>
+            </div>
+
+            <button class="accordion">wagslane.dev/tags/education</button>
+            <div class="panel">
+                <p class="text-center my-4">No image found on page </td>
+            </div>
+
+            <button class="accordion">wagslane.dev/tags/golang</button>
+            <div class="panel">
+                <p class="text-center my-4">No image found on page </td>
+            </div>
+
+            <button class="accordion">wagslane.dev/tags/management</button>
+            <div class="panel">
+                <p class="text-center my-4">No image found on page </td>
+            </div>
+
+            <button class="accordion">wagslane.dev/tags/philosophy</button>
+            <div class="panel">
+                <p class="text-center my-4">No image found on page </td>
+            </div>
+
+            <button class="accordion">wagslane.dev/tags/writing</button>
+            <div class="panel">
+                <p class="text-center my-4">No image found on page </td>
+            </div>
+
+            <button class="accordion">wagslane.dev/posts/developers-learn-to-say-no</button>
+            <div class="panel">
+
+
+                <h4 class="text-center text-lg my-4">Image with alt text</h4>
+                <p class="text-center my-4">No images found with alt text </td>
+
+
+                <h4 class="text-center text-lg my-4">Image without alt text</h4>
+                <table class="mb-4">
+                    <tr>
+                        <th>#</th>
+                        <th>Image src</th>
+                        <th>View image</th>
+                    </tr>
+
+
+                    <tr>
+                        <td>1</td>
+                        <td>https://wagslane.dev/img/800/say-no.webp.webp</td>
+                        <td><a href=https://wagslane.dev/img/800/say-no.webp.webp target="_blank">
+                                <i class="fa fa-fw fa-eye"></i>
+                            </a></td>
+                    </tr>
+
+                </table>
+
+
+            </div>
+
+        </div>
+    </div>
+    <footer class="bg-neutral-100 text-center lg:text-left">
+        <div class="p-4 text-center">
+            © 2023: made with 🖤 by Ritik for a better web.
+        </div>
+    </footer>
+    <button type="button" data-mdb-ripple="true" data-mdb-ripple-color="light"
+        class="inline-block p-3 bg-green-500 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-green-800 hover:shadow-lg focus:bg-green-800 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-500 active:shadow-lg transition duration-150 ease-in-out bottom-5 right-5"
+        id="btn-back-to-top">
+        <svg aria-hidden="true" focusable="false" data-prefix="fas" class="w-4 h-4" role="img"
+            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+            <path fill="currentColor"
+                d="M34.9 289.5l-22.2-22.2c-9.4-9.4-9.4-24.6 0-33.9L207 39c9.4-9.4 24.6-9.4 33.9 0l194.3 194.3c9.4 9.4 9.4 24.6 0 33.9L413 289.4c-9.5 9.5-25 9.3-34.3-.4L264 168.6V456c0 13.3-10.7 24-24 24h-32c-13.3 0-24-10.7-24-24V168.6L69.2 289.1c-9.3 9.8-24.8 10-34.3.4z">
+            </path>
+        </svg>
+    </button>
+    <script>
+        // Get the button
+        let mybutton = document.getElementById("btn-back-to-top");
+
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function () {
+            scrollFunction();
+        };
+
+        function scrollFunction() {
+            if (
+                document.body.scrollTop > 20 ||
+                document.documentElement.scrollTop > 20
+            ) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+        // When the user clicks on the button, scroll to the top of the document
+        mybutton.addEventListener("click", backToTop);
+
+        function backToTop() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+
+        function printDiv(divName) {
+            let printContents = document.getElementById(divName).innerHTML;
+            let originalContents = document.body.innerHTML;
+            document.body.innerHTML = printContents;
+            window.print();
+            document.body.innerHTML = originalContents;
+        }
+
+        function changeMenu(e) {
+            let elems = document.querySelectorAll(".sidebar .active");
+            [].forEach.call(elems, function (el) {
+                el.classList.remove("active");
+            });
+            e.target.className = "active";
+        }
+    </script>
+
+    <script>
+        // add event listeners to the image analysis elements
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                }
+            });
+        }
+    </script>
+
+</body>
+
+</html>

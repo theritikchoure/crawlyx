@@ -1,5 +1,5 @@
-const { crawlPage } = require('./crawl');
-const { generateReport } = require('./report/report');
+const { crawlPage } = require('./src/crawl');
+const { generateReport } = require('./src/report');
 const package = require('./package');
 
 exports.mainFunction = main;
@@ -28,4 +28,4 @@ async function main() {
     generateReport(baseUrl, pages);
 }
 
-// main();
+main();
