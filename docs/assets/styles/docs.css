@@ -1,0 +1,152 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 16px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.navbar {
+    position: fixed;
+    width: 100%;
+    background-color: red;
+    height: 80px;
+    z-index: 1;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 183px;
+    background-color: #e2e2e2;
+    color: black;
+    text-align: center;
+    border-radius: 6px;
+    padding: 15px 15px;
+    position: absolute;
+    z-index: 1;
+    bottom: 95%;
+    font-weight: 400;
+    left: 50%;
+    font-size: 14px;
+    margin-left: -111px;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #e2e2e2 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+
+.sidebar {
+    margin: 0;
+    padding: 0;
+    width: 235px;
+    background-color: #f1f1f1;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+    margin-top: 80px;
+}
+
+.sidebar a {
+    display: block;
+    color: black;
+    padding: 16px;
+    text-decoration: none;
+}
+
+.sidebar a.active {
+    background-color: #04AA6D;
+    color: white;
+}
+
+.sidebar a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+}
+
+.sidebar a i {
+    margin-right: 7px;
+}
+
+div.main {
+    margin-left: 200px;
+    padding: 1px 70px;
+    padding-top: 100px;
+}
+
+@media screen and (max-width: 700px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .sidebar a {
+        float: left;
+    }
+
+    div.main {
+        margin-left: 0;
+    }
+}
+
+#btn-back-to-top {
+    position: fixed;
+    display: none;
+}
+
+#introduction, #features {
+    color: #5d6778;
+    font-size: 16px;
+    line-height: 30px;
+}
+
+.code-area {
+    white-space: normal;
+    padding: 1rem 1.5rem;
+    border-radius: 3px;
+    font-family: SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+    background: #F8F8FA;
+    border: 1px solid #F0E8E8;
+    color: #1e1e1e;
+    overflow-x: auto!important;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
