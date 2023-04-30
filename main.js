@@ -15,7 +15,7 @@ async function main() {
         process.exit(1);
     }
 
-    const baseUrl = process.argv[2];
+    const baseUrl = (new URL(process.argv[2])).origin;
 
     if(baseUrl === '--version' || baseUrl === '--v') {
         console.log(`> ${package.version}`);
@@ -25,7 +25,7 @@ async function main() {
     console.log(`starting crawl of ${baseUrl}`)
     const pages = await crawlPage(baseUrl, baseUrl, {});
 
-    generateReport(pages);
+    generateReport(baseUrl, pages);
 }
 
 // main();
