@@ -31,7 +31,7 @@ So if you want to improve your website's SEO ranking, optimize your content, and
 
 ## Demo
 
-![demo](https://raw.githubusercontent.com/theritikchoure/crawlyx/main/docs/assets/video/demo.webm)
+![demo](https://raw.githubusercontent.com/theritikchoure/crawlyx/main/docs/assets/images/demo.gif)
 
 ## Installation
 
