@@ -344,6 +344,20 @@ function reportContent(baseUrl, pages) {
     return htmlContent;
 }
 
+function jsonReportContent(baseUrl, pages) {
+    let jsonContent = {
+        title: 'Crawlyx - JSON Report',
+        metaInfo: {
+            baseUrl: baseUrl,
+            linksCrawled: pages.length,
+            reportGeneratedAt: (new Date).toLocaleString()
+        },
+        crawledLinks: pages,
+    }
+
+    return jsonContent;
+}
+
 function generateTableContent(pages) {
     let tableContent = '';
     let serialNumber = 1;
@@ -477,4 +491,4 @@ function generateImageAnalysisContent(pages) {
     return templateContent;
 }
 
-module.exports = { reportContent };
+module.exports = { reportContent, jsonReportContent };

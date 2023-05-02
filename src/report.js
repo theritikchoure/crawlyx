@@ -1,16 +1,22 @@
 const { JSDOM } = require('jsdom');
 const fs = require('fs');
 const { exec } = require("child_process");
-const { reportContent } = require("../utils/reportContent");
+const { reportContent, jsonReportContent } = require("../utils/reportContent");
 
 function generateReport(baseUrl, pages) {
     const sortedPages = sortPages(pages);
 
     const htmlContent = reportContent(baseUrl, sortedPages);
 
+    const jsonContent = jsonReportContent(baseUrl, sortedPages);
+
     fs.mkdirSync(`${__dirname}/awesome-report`, { recursive: true },);
     let reportFilePath = `${__dirname}/awesome-report/report.html`;
     fs.writeFileSync(reportFilePath, htmlContent);
+
+    console.log(jsonContent)
+    let jsonReportFilePath = `${__dirname}/awesome-report/report.json`;
+    fs.writeFileSync(jsonReportFilePath, JSON.stringify(jsonContent));
 
 
     console.log("=========================================================");
