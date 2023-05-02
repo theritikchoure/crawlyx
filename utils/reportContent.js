@@ -118,6 +118,13 @@ function reportContent(baseUrl, pages) {
             padding: 1px 16px;
         }
 
+        .sidebar-dropdown {
+            margin: 0;
+            padding: 0;
+            width: 200px;
+            background-color: #f1f1f1;
+        }
+
         @media screen and (max-width: 700px) {
             .sidebar {
                 width: 100%;
@@ -177,6 +184,76 @@ function reportContent(baseUrl, pages) {
             overflow: hidden;
             transition: max-height 0.2s ease-out;
         }
+
+        .sidebar-dropdown {
+            background-color: white;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            font-size: 15px;
+            padding-left: 20px;
+        }
+
+        .sidebar-dropdown a:hover:not(.active) {
+            background-color: #d6d6d6;
+            color: black;
+        }
+
+
+        /* The Modal (background) */
+        .modal {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1;
+            /* Sit on top */
+            padding-top: 100px;
+            /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%;
+            /* Full width */
+            height: 100%;
+            /* Full height */
+            overflow: auto;
+            /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0);
+            /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4);
+            /* Black w/ opacity */
+        }
+
+        /* Modal Content */
+        .downlaod-modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        .downlaod-modal-content a {
+            display: block;
+            color: black;
+            padding: 16px;
+            text-decoration: none;
+        }
+
+        /* The Close Button */
+        #download-modal-close {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        #download-modal-close:hover,
+        #download-modal-close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -186,8 +263,16 @@ function reportContent(baseUrl, pages) {
         <a class="active" href="#home" onclick="changeMenu(event)"> <i class="fa fa-fw fa-home"></i>Home</a>
         <a href="#links" onclick="changeMenu(event)"><i class="fa fa-fw fa-link"></i>Links</a>
         <a href="#image-analytics" onclick="changeMenu(event)"><i class="fa fa-fw fa-image"></i>Image analytics</a>
-        <a href="javascript:void(0)" onclick="printDiv('home')"><i class="fa fa-fw fa-print"></i>Print report</a>
-        <a href="#help" onclick="changeMenu(event)"><i class="fa fa-fw fa-question"></i>Help</a>
+        <a href="javascript:void(0)" class="dropdown-menu" onclick="changeMenu(event); handleSidebarDropdown(event)"><i
+                class="fa fa-fw fa-print"></i>Download report</a>
+        <div class="sidebar-dropdown">
+            <a href="javascript:void(0)" onclick="printDiv('home')">- Download pdf</a>
+            <a href="javascript:void(0)" download="crawlyx-report.html"
+                onclick="this.href='data:text/html;charset=UTF-8,'+encodeURIComponent(document.documentElement.outerHTML)">-
+                Download html</a>
+            <a href="./report.json" download>- Downlaod json</a>
+        </div>
+        <a href="https://theritikchoure.github.io/crawlyx/docs/documentation.html" target="_blank" onclick="changeMenu(event)"><i class="fa fa-fw fa-question"></i>Help</a>
     </div>
 
     <div class="main mb-12" id="home">
@@ -302,11 +387,24 @@ function reportContent(baseUrl, pages) {
         }
 
         function printDiv(divName) {
-            let printContents = document.getElementById(divName).innerHTML;
-            let originalContents = document.body.innerHTML;
-            document.body.innerHTML = printContents;
-            window.print();
-            document.body.innerHTML = originalContents;
+            if (divName === 'home') {
+                for (const a of acc) {
+                    a.classList.toggle("active");
+                    let panel = a.nextElementSibling;
+                    if (panel.style.maxHeight) {
+                        panel.style.maxHeight = null;
+                    } else {
+                        panel.style.maxHeight = panel.scrollHeight + "px";
+                    }
+                }
+                let printContents = document.getElementById(divName).innerHTML;
+                let originalContents = document.body.innerHTML;
+                document.body.innerHTML = printContents;
+                window.print();
+                window.location.reload();
+            } else {
+                alert('Not printing contents')
+            }
         }
 
         function changeMenu(e) {
@@ -333,6 +431,51 @@ function reportContent(baseUrl, pages) {
                     panel.style.maxHeight = panel.scrollHeight + "px";
                 }
             });
+        }
+    </script>
+
+    <!-- The Modal -->
+    <div id="downlaod-modal" class="modal">
+
+        <!-- Modal content -->
+        <div class="downlaod-modal-content">
+            <span id="download-modal-close">&times;</span>
+            <a href="javascript:void(0)" onclick="printDiv('home')">- Download pdf</a>
+            <a href="javascript:void(0)" download="crawlyx-report.html"
+                onclick="this.href='data:text/html;charset=UTF-8,'+encodeURIComponent(document.documentElement.outerHTML)">-
+                Download html</a>
+            <a href="./report.json" download>- Download json</a>
+        </div>
+
+    </div>
+
+    <script>
+        // handle download sidebar drop down
+        let downloadModal = document.getElementById("downlaod-modal");
+
+        function handleSidebarDropdown(event) {
+            if (window.screen.width < 700) {
+                // mobile screen
+                downloadModal.style.display = 'block';
+            } else {
+                let sidebarDropdown = document.getElementsByClassName('sidebar-dropdown')[0];
+                if (sidebarDropdown.style.maxHeight) {
+                    sidebarDropdown.style.maxHeight = null;
+                } else {
+                    sidebarDropdown.style.maxHeight = sidebarDropdown.scrollHeight + "px";
+                }
+            }
+        }
+
+        document.getElementById('download-modal-close').onclick = function () {
+            downloadModal.style.display = 'none';
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == downloadModal) {
+                downloadModal.style.display = "none";
+            }
         }
     </script>
 
