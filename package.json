@@ -23,7 +23,8 @@
     "cross-platform",
     "configurable options",
     "plugin system",
-    "open-source"
+    "open-source",
+    "crawling", "crawler", "scraper", "spider"
   ],
   "devDependencies": {
     "jest": "^29.5.0"

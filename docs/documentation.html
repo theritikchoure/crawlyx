@@ -159,12 +159,11 @@
                     <li><b>1. Parsing the command-line arguments:</b> Crawlyx uses the popular commander.js library to
                         parse
                         the command-line arguments and options. This allows users to specify the website URL, the output
-                        format, the crawl depth, and other options.</li>
+                        format and other options.</li>
                     <br>
-                    <li><b>2. Parsing the command-line arguments:</b> Crawlyx uses the popular commander.js library to
-                        parse
-                        the command-line arguments and options. This allows users to specify the website URL, the output
-                        format, the crawl depth, and other options.</li>
+                    <li><b>2. Crawling the website:</b> Crawlyx uses the <code>fetch</code> function and <code>JSDOM</code> library to crawl the website and extract data such
+                        as page titles, meta descriptions, headings, links, images, and other elements. This data is
+                        stored in an internal data structure that can be processed and exported later.</li>
                     <br>
                     <li><b>3. Analyzing the website:</b> Crawlyx uses various algorithms to analyze the internal linking
                         structure of the website, identify broken links, duplicate content, missing tags, and other
@@ -200,18 +199,23 @@
                 <br>
                 <p>This command tells Crawlyx to crawl the website <code>https://example.com</code></p>
                 <br>
-                <p>2. Wait for Crawlyx to finish crawling the website. Depending on the size of the website, this could take several minutes or even hours.</p>
+                <p>2. Wait for Crawlyx to finish crawling the website. Depending on the size of the website, this could
+                    take several minutes or even hours.</p>
                 <br>
-                <p>3. Once Crawlyx has finished crawling, it will automatically open the <code>report.html</code> file in your default web browser. You'll see a comprehensive report that includes data such as page titles, meta descriptions, headings, links, images, and other elements of the website.</p>
+                <p>3. Once Crawlyx has finished crawling, it will automatically open the <code>report.html</code> file
+                    in your default web browser. You'll see a comprehensive report that includes data such as page
+                    titles, meta descriptions, headings, links, images, and other elements of the website.</p>
                 <br>
-                <p>4. Use the report to identify areas of the website that need improvement. For example, you might discover that certain pages have missing or duplicate meta descriptions, broken links, or poor internal linking structure</p>
+                <p>4. Use the report to identify areas of the website that need improvement. For example, you might
+                    discover that certain pages have missing or duplicate meta descriptions, broken links, or poor
+                    internal linking structure</p>
                 <br>
                 <img src="./assets/images/home-screenshot.png" alt="code flow of crawlyx" srcset="">
                 <br>
                 <a href="./report.html" target="_blank"
-                        class="inline-flex items-center justify-center w-full px-6 py-1 mb-2 text-lg text-white bg-green-400 sm:w-auto sm:mb-0">
-                        View dummy report
-                    </a>
+                    class="inline-flex items-center justify-center w-full px-6 py-1 mb-2 text-lg text-white bg-green-400 sm:w-auto sm:mb-0">
+                    View dummy report
+                </a>
         </div>
 
         <!-- Edit on github -->

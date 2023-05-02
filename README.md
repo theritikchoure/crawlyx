@@ -73,13 +73,17 @@ crawlyx <valid-website>
 | ✅     | ✅   | ✅  |
 
 ## How it works
-1. **Parsing the command-line arguments:** Crawlyx uses the popular commander.js library to parse the command-line arguments and options. This allows users to specify the website URL, the output format, the crawl depth, and other options.
+1. **Parsing the command-line arguments:** Crawlyx uses the popular commander.js library to parse the command-line arguments and options. This allows users to specify the website URL and other options.
 
-2. **Parsing the command-line arguments:** Crawlyx uses the popular commander.js library to parse the command-line arguments and options. This allows users to specify the website URL, the output format, the crawl depth, and other options.
+2. **Crawling the website:** Crawlyx uses the `fetch` function and `JSDOM` library to crawl the website and extract data such
+as page titles, meta descriptions, headings, links, images, and other elements. This data is stored in an internal data structure that can be processed and exported later.
 
 3. **Analyzing the website:** Crawlyx uses various algorithms to analyze the internal linking structure of the website, identify broken links, duplicate content, missing tags, and other issues that may be hurting the SEO ranking of the website.
 
 4. **Generating the report:** Crawlyx uses the specified output format to generate the report. This can be in CSV, JSON, or HTML format, depending on the user's choice. The report contains various data fields such as page title, meta description, headings, links, images, and other data extracted from the website.
+
+<img src="https://raw.githubusercontent.com/theritikchoure/crawlyx/main/docs/assets/images/code-flow.png" alt="Crawlyx">
+<br>
 
 ## Contribution
 
