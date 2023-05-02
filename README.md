@@ -29,6 +29,10 @@ So if you want to improve your website's SEO ranking, optimize your content, and
 
 [![NPM](https://nodei.co/npm/crawlyx.png)](https://nodei.co/npm/crawlyx/)
 
+## Demo
+
+![demo](https://raw.githubusercontent.com/theritikchoure/crawlyx/main/docs/assets/video/demo.webm)
+
 ## Installation
 
 ```bash
