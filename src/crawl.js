@@ -1,4 +1,5 @@
 const { JSDOM } = require('jsdom');
+const fetch = require('node-fetch');
 
 async function crawlPage(baseUrl, currentUrl, pages) {
     
