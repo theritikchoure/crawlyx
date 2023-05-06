@@ -14,14 +14,13 @@ function generateReport(baseUrl, pages) {
     let reportFilePath = `${__dirname}/awesome-report/report.html`;
     fs.writeFileSync(reportFilePath, htmlContent);
 
-    console.log(jsonContent)
     let jsonReportFilePath = `${__dirname}/awesome-report/report.json`;
     fs.writeFileSync(jsonReportFilePath, JSON.stringify(jsonContent));
 
 
     console.log("=========================================================");
     console.log(`\x1b[22;92mReport generated successfully \x1b[0m`);
-    console.log(reportFilePath);
+    console.log(`Report path: `, reportFilePath);
     exec(`start ${reportFilePath}`);
 }
 
