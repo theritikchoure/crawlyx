@@ -1,0 +1,33 @@
+.cookie{
+	width: 420px;
+    height: 72px;
+    background-color: #4ade80;
+    position: fixed;
+    bottom: 20px;
+    border-radius: 10px;
+	left: 2%;
+	padding: 10px 20px;
+}
+
+.cookie .txt{
+	float: left;
+    width: 65%;
+}
+.txt p{
+	color:#fff;
+}
+
+.cookie .accept {
+    background-color: #fff;
+    color: #4ade80 !important;
+    border-radius: 32px;
+    padding: 3px 23px;
+    /* align-self: center; */
+    font-size: 19px;
+    margin-top: 2.5%;	
+    margin-left: 3%;
+
+}
+.cookie .accept:hover {
+	cursor: pointer;
+}
