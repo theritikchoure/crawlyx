@@ -49,6 +49,12 @@ Type in your cmd -
 crawlyx --version
 ```
 
+### Installation troubleshoot
+If you are still getting an installation error after the global installation, You can change the execution policy of PowerShell to allow running unsigned scripts. Open your terminal in vs code or whatever ide you use and run the following command 
+```bash
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted
+```
+
 ## CLI Usage
 Start crawling by the following command -
 
