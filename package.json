@@ -10,8 +10,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node main.js",
-    "test": "jest",
-    "publish": "npm publish"
+    "test": "jest"
   },
   "keywords": [
     "web crawler",
