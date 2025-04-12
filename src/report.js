@@ -11,31 +11,34 @@ const { reportContent, jsonReportContent } = require("../utils/reportContent");
  * @param {Object} pages - An object containing information about crawled pages.
  */
 function generateReport(baseUrl, pages) {
-    // Step 1: Sort the crawled pages by occurrence.
-    const sortedPages = sortPages(pages);
+  // Step 1: Sort the crawled pages by occurrence.
+  const sortedPages = sortPages(pages);
 
-    // Step 2: Generate an HTML report.
-    const htmlContent = reportContent(baseUrl, sortedPages);
+  // Step 2: Generate an HTML report.
+  const htmlContent = reportContent(baseUrl, sortedPages);
 
-    // Step 3: Generate a JSON report.
-    const jsonContent = jsonReportContent(baseUrl, sortedPages);
+  // Step 3: Generate a JSON report.
+  const jsonContent = jsonReportContent(baseUrl, sortedPages);
 
-    // Step 4: Create a directory for the report.
-    fs.mkdirSync(`${__dirname}/awesome-report`, { recursive: true });
+  const timestamp = Date.now();
+  const reportDir = `${__dirname}/awesome-report`;
+  const reportFilePath = `${reportDir}/report-${timestamp}.html`;
+  const jsonReportFilePath = `${reportDir}/report-${timestamp}.json`;
 
-    // Step 5: Write the HTML report to a file.
-    let reportFilePath = `${__dirname}/awesome-report/report.html`;
-    fs.writeFileSync(reportFilePath, htmlContent);
+  // Step 4: Create a directory for the report.
+  fs.mkdirSync(reportDir, { recursive: true });
 
-    // Step 6: Write the JSON report to a file.
-    let jsonReportFilePath = `${__dirname}/awesome-report/report.json`;
-    fs.writeFileSync(jsonReportFilePath, JSON.stringify(jsonContent));
+  // Step 5: Write the HTML report to a file.
+  fs.writeFileSync(reportFilePath, htmlContent);
 
-    // Step 7: Open the HTML report in the default web browser.
-    console.log("=========================================================");
-    console.log(`\x1b[22;92mReport generated successfully \x1b[0m`);
-    console.log(`Report path: `, reportFilePath);
-    exec(`start ${reportFilePath}`);
+  // Step 6: Write the JSON report to a file.
+  fs.writeFileSync(jsonReportFilePath, JSON.stringify(jsonContent));
+
+  // Step 7: Open the HTML report in the default web browser.
+  console.log("=========================================================");
+  console.log(`\x1b[22;92mReport generated successfully \x1b[0m`);
+  console.log(`Report path: `, reportFilePath);
+  exec(`start ${reportFilePath}`);
 }
 
 /**
