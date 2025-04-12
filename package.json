@@ -1,6 +1,6 @@
 {
   "name": "crawlyx",
-  "version": "2.2.3",
+  "version": "2.2.4",
   "description": "Crawlyx is an open-source command-line interface (CLI) based web crawler built using Node.js. It is designed to crawl websites and extract useful information like links, images, and text. It is lightweight, fast, and easy to use.",
   "main": "index.js",
   "bin": {
