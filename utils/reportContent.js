@@ -225,7 +225,7 @@ function reportContent(baseUrl, pages) {
         }
 
         /* Modal Content */
-        .downlaod-modal-content {
+        .download-modal-content {
             background-color: #fefefe;
             margin: auto;
             padding: 20px;
@@ -233,7 +233,7 @@ function reportContent(baseUrl, pages) {
             width: 80%;
         }
 
-        .downlaod-modal-content a {
+        .download-modal-content a {
             display: block;
             color: black;
             padding: 16px;
@@ -270,7 +270,7 @@ function reportContent(baseUrl, pages) {
             <a href="javascript:void(0)" download="crawlyx-report.html"
                 onclick="this.href='data:text/html;charset=UTF-8,'+encodeURIComponent(document.documentElement.outerHTML)">-
                 Download html</a>
-            <a href="./report.json" download>- Downlaod json</a>
+            <a href="./report.json" download>- Download json</a>
         </div>
         <a href="https://theritikchoure.github.io/crawlyx/docs/documentation.html" target="_blank" onclick="changeMenu(event)"><i class="fa fa-fw fa-question"></i>Help</a>
     </div>
@@ -435,10 +435,10 @@ function reportContent(baseUrl, pages) {
     </script>
 
     <!-- The Modal -->
-    <div id="downlaod-modal" class="modal">
+    <div id="download-modal" class="modal">
 
         <!-- Modal content -->
-        <div class="downlaod-modal-content">
+        <div class="download-modal-content">
             <span id="download-modal-close">&times;</span>
             <a href="javascript:void(0)" onclick="printDiv('home')">- Download pdf</a>
             <a href="javascript:void(0)" download="crawlyx-report.html"
@@ -451,7 +451,7 @@ function reportContent(baseUrl, pages) {
 
     <script>
         // handle download sidebar drop down
-        let downloadModal = document.getElementById("downlaod-modal");
+        let downloadModal = document.getElementById("download-modal");
 
         function handleSidebarDropdown(event) {
             if (window.screen.width < 700) {
