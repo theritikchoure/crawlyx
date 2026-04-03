@@ -27,7 +27,7 @@ async function main() {
   // Check if the command-line argument is '--version' or '--v'.
   if (argument === "--version" || argument === "--v") {
     console.log(`> ${package.version}`); // Print the package version.
-    process.exit(1); // Exit with an error code.
+    process.exit(0); // Exit with success.
   }
 
   // Extract the base URL from the command-line argument, assuming it's a valid URL.
